@@ -1,0 +1,28 @@
+
+# .github/workflows/production_cd.yml
+
+name: Production CD
+
+on:
+  push:
+    branches:
+      - production
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment: production-env
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+      - name: Install dependencies
+        run: npm install
+      - name: Deploy to Production
+        run: echo "Deploying to production environment"
+        # Add deployment steps here
+      - name: Manual Approval
+        run: echo "Manual approval needed here"
+        # Implement manual approval process
