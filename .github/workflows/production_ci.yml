@@ -1,0 +1,25 @@
+# .github/workflows/production_ci.yml
+
+name: Production CI
+
+on:
+  pull_request:
+    branches:
+      - production
+
+jobs:
+  final_tests:
+    runs-on: ubuntu-latest
+    environment: production-env
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+      - name: Install dependencies
+        run: npm install
+      - name: Run final tests
+        run: npm test
+      - name: Build
+        run: npm run build
