@@ -1,0 +1,25 @@
+# .github/workflows/staging_cd.yml
+
+name: Staging CD
+
+on:
+  push:
+    branches:
+      - release
+
+jobs:
+  build_and_deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Node
+        uses: actions/setup-node@v1
+        with:
+          node-version: '14'
+      - name: Install dependencies
+        run: npm install
+      - name: Build
+        run: npm run build
+      - name: Deploy to Staging Environment
+        run: echo "Deploying to staging environment"
+        # Add deployment steps here
